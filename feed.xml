@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>monoblog</title>
+  <link>https://blog.monointerferen.de/</link>
+  <description>monointerferenz</description>
+  <language>en</language>
+  <lastBuildDate>Mon, 12 Oct 2026 00:00:00 GMT</lastBuildDate>
+  <atom:link href="https://blog.monointerferen.de/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>and the date from the element. --&gt; monoblog posts tags about rss Just me, html, a script and an editor</title>
+    <link>https://blog.monointerferen.de/posts/2026-10-12-me-html-editor.html</link>
+    <guid isPermaLink="true">https://blog.monointerferen.de/posts/2026-10-12-me-html-editor.html</guid>
+    <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+    <category>meta</category>
+    <category>development/web</category>
+    <description><![CDATA[<p>monoblog has a new look and a new engine, or no engine.
+     Like monointerferenz the blog was based on Jekyll. But I wanted less. No dependencies, no deployment. So here we are. Simple, handwritten html files. Just a small script handles the rss feed, the tag system and the index page. It runs locally, gets not deployed. Just me, a script and an editor..</p>]]></description>
+  </item>
+</channel>
+</rss>
