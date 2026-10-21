@@ -14,8 +14,10 @@
     <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
     <category>meta</category>
     <category>development/web</category>
-    <description><![CDATA[<p>monoblog has a new look and a new engine, or no engine.
-     Like monointerferenz the blog was based on Jekyll. But I wanted less. No dependencies, no deployment. So here we are. Simple, handwritten html files. Just a small script handles the rss feed, the tag system and the index page. It runs locally, gets not deployed. Just me, a script and an editor..</p>]]></description>
+    <description><![CDATA[<p>monoblog has a new look and a new engine, or no engine.</p>
+  <p>Like monointerferenz the blog was based on Jekyll. But I wanted less. No dependencies, no deployment, no management. So here we are. <br>
+    Simple, handwritten html files. Just a small script handles the rss feed, the tag system and the index page. It runs locally, gets not deployed. <br>
+    Just me, a script and an editor.</p>]]></description>
   </item>
 </channel>
 </rss>
