@@ -5,8 +5,115 @@
   <link>https://blog.monointerferen.de/</link>
   <description>monointerferenz</description>
   <language>en</language>
-  <lastBuildDate>Mon, 12 Oct 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 23 Oct 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://blog.monointerferen.de/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>and the date from the element. --&gt; monoblog posts tags about rss Designing a Sematic Writing System</title>
+    <link>https://blog.monointerferen.de/posts/2026-10-23-designing_a_sematic_writing_system.html</link>
+    <guid isPermaLink="true">https://blog.monointerferen.de/posts/2026-10-23-designing_a_sematic_writing_system.html</guid>
+    <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+    <category>ai</category>
+    <category>development</category>
+    <category>coding</category>
+    <description><![CDATA[<h2 id='concept'>Concept</h2>
+        <p>Key-Idea: <strong>The text is not the primary object. The argument structure is.</strong></p>
+        <ul>
+          <li>A writing assistant where the user builds a semantic graph of ideas, evidence, and argumentative relations; the LLM only transforms selected graph paths into prose. This process is semi-dynamic. Calculation times are normal behaviours. Quality &gt; Realtime.</li>
+          
+        </ul>
+        <p>The Graph consits of &quot;Crad&quot; and &quot;Links&quot;.</p>
+        <p>A possible model for the &quot;Card&quot; is:</p>
+        <pre><code>Card
+         ├─ type: idea | claim | source | quote | observation | counterpoint | conclusion
+         ├─ content: short semantic statement
+         ├─ evidence: linked sources / excerpts
+         ├─ relations:
+         │   ├─ supports
+         │   ├─ contradicts
+         │   ├─ expands
+         │   ├─ leads_to
+         │   └─ concludes
+         └─ status: raw | checked | usable | written
+       </code></pre>
+       <p>Then the LLM does not “invent an essay”. It receives a constrained graph:</p>
+       <pre><code>Claim A
+        supported_by Source X
+        expands Idea B
+        leads_to Conclusion C
+      </code></pre>
+      <p>and is asked to formulate prose from that structure.</p>
+      <p>A strong version would seperate Layers:  </p>
+      <ol start='' >
+        <li><p>Knowldge Layer</p>
+          <ul>
+            <li>Cards, sources, quotes, observations, claims.</li>
+
+          </ul>
+        </li>
+        <li><p>Argument Layer</p>
+          <ul>
+            <li>Directed links: supports, causes, contrasts, concludes.</li>
+
+          </ul>
+        </li>
+        <li><p>Text Layer</p>
+          <ul>
+            <li>Paragraphs generated from selected paths through the graph.</li>
+
+          </ul>
+        </li>
+
+      </ol>
+      <h2 id='a-simple-example'>A simple example:</h2>
+      <pre><code class='language-yaml' lang='yaml'>cards:
+        A:
+        type: claim
+        text: Water is good for you.
+
+        B:
+        type: source
+        text: Study about the affects of water on the human body.
+
+        C:
+        type: claim
+        text: You should drink more water.
+
+        D:
+        type: conclusion
+        text: Water is indeed good for you and you should drink more of it.
+
+        links:
+        - from: B
+        to: A
+        relation: supports
+
+        - from: A
+        to: C
+        relation: leads_to
+
+        - from: C
+        to: D
+        relation: supports
+      </code></pre>
+      <p>The llm-prompt could be like this:</p>
+      <pre><code>Write one academic paragraph using only cards A, B, C, and D.
+        Preserve the argument order.
+        Do not introduce external claims.
+        Use source B only as support for claim A.
+        End with conclusion D.
+      </code></pre>
+      <p>The important part: the system should not only store “ideas”, but also the <strong>epistemic status</strong> of ideas.</p>
+      <p>For example:</p>
+      <pre><code>raw thought
+        personal observation
+        supported claim
+        direct quotation
+        interpretive claim
+        speculative connection
+        final argument
+      </code></pre>
+      <p>That matters because a source card and an intuition card should not have the same authority.</p>]]></description>
+  </item>
   <item>
     <title>Just me, html, a script and an editor</title>
     <link>https://blog.monointerferen.de/posts/2026-10-12-me-html-editor.html</link>

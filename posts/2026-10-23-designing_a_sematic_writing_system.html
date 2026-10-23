@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Designing a Sematic Writing System</title>
+
+<!--
+  POST METADATA — edit the two lines below, then run: node build.mjs
+
+  tags     comma-separated. Use "/" to nest: code/rust, code/rust/async, notes
+           every parent is created for you.
+  summary  optional one-liner shown on the front page.
+
+  The build reads the title from the <h1> and the date from the <time> element.
+  -->
+  <meta name="tags" content="ai, development, coding">
+  <meta name="summary" content="A one-sentence summary for the front page.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&amp;display=swap">
+  <link rel="alternate" type="application/rss+xml" title="yoctoblog" href="../feed.xml">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-title" href="../index.html">monoblog</a>
+      <nav class="site-nav">
+        <a href="../index.html">posts</a>
+        <a href="../tags/index.html">tags</a>
+        <a href="../about.html">about</a>
+        <a href="../feed.xml">rss</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="post">
+        <header class="post-header">
+          <h1>Designing a Sematic Writing System</h1>
+          <time class="post-date" datetime="2026-10-23">2026-10-23</time>
+        </header>
+
+        <h2 id='concept'>Concept</h2>
+        <p>Key-Idea: <strong>The text is not the primary object. The argument structure is.</strong></p>
+        <ul>
+          <li>A writing assistant where the user builds a semantic graph of ideas, evidence, and argumentative relations; the LLM only transforms selected graph paths into prose. This process is semi-dynamic. Calculation times are normal behaviours. Quality &gt; Realtime.</li>
+          
+        </ul>
+        <p>The Graph consits of &quot;Crad&quot; and &quot;Links&quot;.</p>
+        <p>A possible model for the &quot;Card&quot; is:</p>
+        <pre><code>Card
+         ├─ type: idea | claim | source | quote | observation | counterpoint | conclusion
+         ├─ content: short semantic statement
+         ├─ evidence: linked sources / excerpts
+         ├─ relations:
+         │   ├─ supports
+         │   ├─ contradicts
+         │   ├─ expands
+         │   ├─ leads_to
+         │   └─ concludes
+         └─ status: raw | checked | usable | written
+       </code></pre>
+       <p>Then the LLM does not “invent an essay”. It receives a constrained graph:</p>
+       <pre><code>Claim A
+        supported_by Source X
+        expands Idea B
+        leads_to Conclusion C
+      </code></pre>
+      <p>and is asked to formulate prose from that structure.</p>
+      <p>A strong version would seperate Layers:  </p>
+      <ol start='' >
+        <li><p>Knowldge Layer</p>
+          <ul>
+            <li>Cards, sources, quotes, observations, claims.</li>
+
+          </ul>
+        </li>
+        <li><p>Argument Layer</p>
+          <ul>
+            <li>Directed links: supports, causes, contrasts, concludes.</li>
+
+          </ul>
+        </li>
+        <li><p>Text Layer</p>
+          <ul>
+            <li>Paragraphs generated from selected paths through the graph.</li>
+
+          </ul>
+        </li>
+
+      </ol>
+      <h2 id='a-simple-example'>A simple example:</h2>
+      <pre><code class='language-yaml' lang='yaml'>cards:
+        A:
+        type: claim
+        text: Water is good for you.
+
+        B:
+        type: source
+        text: Study about the affects of water on the human body.
+
+        C:
+        type: claim
+        text: You should drink more water.
+
+        D:
+        type: conclusion
+        text: Water is indeed good for you and you should drink more of it.
+
+        links:
+        - from: B
+        to: A
+        relation: supports
+
+        - from: A
+        to: C
+        relation: leads_to
+
+        - from: C
+        to: D
+        relation: supports
+      </code></pre>
+      <p>The llm-prompt could be like this:</p>
+      <pre><code>Write one academic paragraph using only cards A, B, C, and D.
+        Preserve the argument order.
+        Do not introduce external claims.
+        Use source B only as support for claim A.
+        End with conclusion D.
+      </code></pre>
+      <p>The important part: the system should not only store “ideas”, but also the <strong>epistemic status</strong> of ideas.</p>
+      <p>For example:</p>
+      <pre><code>raw thought
+        personal observation
+        supported claim
+        direct quotation
+        interpretive claim
+        speculative connection
+        final argument
+      </code></pre>
+      <p>That matters because a source card and an intuition card should not have the same authority.</p>
+
+
+      <footer class="post-footer">
+        <span class="label">Tags</span>
+        <span class="post-tags">
+          <!-- tags:start -->
+      <a class="tag" href="../tags/ai/index.html">#ai</a>
+      <a class="tag" href="../tags/development/index.html">#development</a>
+      <a class="tag" href="../tags/coding/index.html">#coding</a>
+      <!-- tags:end -->
+        </span>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>monoblog — monointerferenz · <a href="../feed.xml">rss</a></p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" data-autoloader-path="https://cdn.jsdelivr.net/npm/prismjs@1/components/"></script>
+</body>
+</html>
